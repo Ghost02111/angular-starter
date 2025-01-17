@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../../../service/category-service';
-import * as ProductAction from '../../../../store/product/product.action'
+import * as ProductActions from '../../../../store/product/product.action'
 
 @Component({
   selector: 'app-product-update',
@@ -25,6 +25,8 @@ export class ProductUpdateComponent implements OnInit {
 
   id: number = 0 
   product: Product = new Product
+  previewUrl: string | null = null 
+  selectedFile: File | null = null
 
   categories: Category[] = []
   selectedCategoryId: number | null = null;
@@ -82,9 +84,25 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   updateAction() {
-    const currentId = this.route.snapshot.params['id'] ;
-    const payload = this.product ;
-    this.store.dispatch(ProductAction.updateProduct(payload));
+    console.log('updateImageUrl ==>', this.selectedFile)
+    
+    const formData: FormData = new FormData();
+    formData.append('id', this.id.toString());
+    formData.append('name', this.product.name);
+    formData.append('producer', this.product.producer);
+    formData.append('price', this.product.price.toString());
+    formData.append('country', this.product.country);
+    formData.append('category', this.product.category);
+    if( this.selectedFile ) {
+      formData.append('productImage', this.selectedFile, this.selectedFile.name)
+    }
+      
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+      // Dispatch the action
+      
+    this.store.dispatch(ProductActions.updateProduct({ product: formData }));
     this.location.back()
     // this.productService.update(currentId, payload).subscribe({
     //   next: (data) => {
@@ -95,6 +113,32 @@ export class ProductUpdateComponent implements OnInit {
     //     console.log('update err: ', error)
     //   }
     // }) ;
+  }
+
+  
+  onFileSelected(event: Event) : void {
+    const input = event.target as HTMLInputElement ;
+    console.log('input =>', input.value) ;
+    if( input.files && input.files.length > 0 ) {
+      const file = input.files[0] ;
+      // Check if the selected file is an image
+      if( file.type.startsWith('image/') ) {
+        this.selectedFile = file ;
+
+        const reader = new FileReader() ;
+        console.log('reader =>', reader )
+        reader.onload = () => {
+          this.previewUrl = reader.result as string ;
+        };
+        console.log('reader.result =>', this.previewUrl)
+        reader.readAsDataURL(file);
+      } else {
+        alert('You must select the image file, please try again!') ;
+        input.value = ''; // clear the input
+        this.previewUrl = null ;
+      }
+    }
+
   }
 
 

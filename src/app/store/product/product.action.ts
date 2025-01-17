@@ -3,7 +3,7 @@ import { Product } from '../../component/Admin/models/product';
 
 export const createProduct = createAction (
     '[Product Page] create product' ,
-    props<{ product: { name: string ; producer: string ; country: string ; price: number ; category: string }}>()
+    props<{ product: FormData }>()
 )
 
 export const createProductSuccess = createAction (
@@ -47,14 +47,7 @@ export const deleteProductFailure = createAction (
 
 export const updateProduct = createAction (
     '[product] update product' ,
-    props<{ 
-        id: number, 
-        name: string,
-        producer: string,
-        price:number, 
-        country: string, 
-        category:string 
-    }>()
+    props<{ product: FormData }>()
 ) 
 
 export const updateProductSuccess = createAction (

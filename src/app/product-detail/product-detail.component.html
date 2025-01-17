@@ -5,8 +5,17 @@
 
     <div class='card-body'>
         <div class='row'>
-            <div class='col-md-5'>
-                <img class='center-block img-responsive ' src="../../src/img1.jpg" alt="Description">
+            <div class='col-md-5' style="display: flex;
+            justify-content: center;">
+                @if (product.imgUrl) {
+                    <img class="productImage"  
+                    [src]="'http://localhost:4000/' + product.imgUrl"  alt="kkk"  
+                 >
+                  } @else {
+                    <img class="productImage"  
+                    [src]="'http://localhost:4000/uploads/1735588001278-photo_2024-11-21_19-21-24.jpg'"  alt="kkk"  
+                 >
+                  }
             </div>
             <div class='col-md-7'>
                 <div class='row'>
@@ -40,7 +49,7 @@
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="quantity" class="form-label">Quantity:</label>
+                    <label for="quantity" class="form-label"> Quantity:</label>
                     <input
                       type="number"
                       class="form-control"

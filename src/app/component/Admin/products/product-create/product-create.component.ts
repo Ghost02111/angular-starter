@@ -24,7 +24,10 @@ export class ProductCreateComponent implements OnInit{
   validationErrors: any = []
 
   categories: Category[] = []
-  selectedCategoryId: number = 1
+  selectedCategoryId: number = 1;
+  
+  previewUrl: string | null = null ;
+  selectedFile: File | null = null ;
 
 
 
@@ -53,22 +56,24 @@ export class ProductCreateComponent implements OnInit{
 
 
   sendAction() {
+    
+    if( this.selectedFile ) {
+      const formData: FormData = new FormData();
+      formData.append('name', this.name);
+      formData.append('producer', this.producer);
+      formData.append('price', this.price.toString());
+      formData.append('country', this.country);
+      formData.append('category', this.category);
+      formData.append('productImage', this.selectedFile, this.selectedFile.name)
+      
+      // Dispatch the action
+      this.store.dispatch(ProductActions.createProduct({ product: formData }));
 
-    let payload: { product: {name: string; producer: string; country: string; price: number; category: string} } = {
-       product: { name: this.name ,
-                  producer: this.producer ,
-                  country: this.country ,
-                  price: this.price ,
-                  category: this.category }   
-    };
-    console.log(' Here is the sendAction function! ', payload) 
-
-    this.store.dispatch(ProductActions.createProduct(payload));
-
+    }
     // this.store.select(selectCreateProductError).subscribe((error) => {
     //   console.log('this is the error from the server =>', error)
     // })
-    
+    this.location.back();
 
   }
 
@@ -79,6 +84,31 @@ export class ProductCreateComponent implements OnInit{
   logoutAction(): void {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/');
+  }
+
+  onFileSelected(event: Event) : void {
+    const input = event.target as HTMLInputElement ;
+    console.log('input =>', input.value) ;
+    if( input.files && input.files.length > 0 ) {
+      const file = input.files[0] ;
+      // Check if the selected file is an image
+      if( file.type.startsWith('image/') ) {
+        this.selectedFile = file ;
+
+        const reader = new FileReader() ;
+        console.log('reader =>', reader )
+        reader.onload = () => {
+          this.previewUrl = reader.result as string ;
+        };
+        console.log('reader.result =>', this.previewUrl)
+        reader.readAsDataURL(file);
+      } else {
+        alert('You must select the image file, please try again!') ;
+        input.value = ''; // clear the input
+        this.previewUrl = null ;
+      }
+    }
+
   }
 }
     // this.productService.createNewProject(payload).subscribe({

@@ -13,9 +13,33 @@
   </div>
   <div class="card-body">
     <div class="row">
+            <div class="col-md-4">
+        <div class="card" style="width: 18rem">
+          <p>Image Preview:</p>
+          @if (previewUrl) {
+            <img [src]="previewUrl" alt="Seleted Image" class="product-image" />
+          } @else {
+            <img
+              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+              alt="Seleted Image"
+              class="product-image"
+            />
+          }
+        </div>
+      </div>
 
       <div class="col-md-8">
         <form>
+          <div class="form-group">
+            <label>Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="inputGroupFile02"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+          </div>
           <div class="form-group">
             <label> Name </label>
             <input type="text" class="form-control" id="name" required minlength="3" maxlength="100" name="name"
@@ -55,14 +79,6 @@
             </select> 
           </div>
           <button class="btn btn-success mt-3" type="submit" (click)="sendAction()">Send</button>
-          <div class="form-group">
-            <!-- @if (f.submitted && errorMessage) {
-  
-              <div class="alert alert-danger" role="alert">
-                Create Product failed: {{ errorMessage }}
-              </div>
-              } -->
-          </div>
         </form>
       </div>
     </div>

@@ -7,6 +7,8 @@ import { ProductService } from "../../service/product-service";
 import * as ProductAction from '../product/product.action'
 import { mergeMap, map , catchError, of } from "rxjs";
 
+import { tap } from "rxjs/operators";
+
 @Injectable() 
 
 export class ProductEffect {
@@ -63,18 +65,23 @@ export class ProductEffect {
     })
 
     updateProduct$ = createEffect(() => {
-      console.log('Here is updateProduct Effect!') 
+
       return inject(Actions)
-        .pipe (
+      .pipe (
+          tap (() => { console.log('Here is updateProduct Effect!') }) , 
           ofType(ProductAction.updateProduct) ,
-          mergeMap(( payload ) => (
-            this.productService.update(payload.id , payload).pipe(
-              map((res) => {
+          mergeMap(( { product } ) => {
+            
+            const id = product.get('id') as string ;
+            console.log('update formdata payload', id)
+            return  this.productService.update(Number(id) , product ).pipe(
+               map((res) => {
                 console.log('res', res) 
                 return ProductAction.updateProductSuccess({ product: res.result } )}) ,
               catchError((error) => of(ProductAction.updateProductFailure({ error }))) ,
-            )
-          ))
+            
+          )}
+         )
         )
     })
 }

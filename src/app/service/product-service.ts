@@ -45,10 +45,6 @@ export class ProductService implements OnInit{
        // console.log('Payload-->' , payload ) 
        console.log('data', data)
 
-        const token = localStorage.getItem('token');
-        const headers = new HttpHeaders({
-              authorization: `Bearer ${token}`, // Add token in Authorization header
-            });
          return this.http.post('/api/products', data, { headers });
       } 
       
@@ -68,7 +64,7 @@ export class ProductService implements OnInit{
     }
 
     update(id: number, payload: any): Observable<any> {
-      console.log('Update payload:', payload)
+      console.log('Update payload id:', payload)
       return this.http.patch(`/api/products/${id}`, payload, { headers } );
     }
 
@@ -80,6 +76,7 @@ export class ProductService implements OnInit{
         producer: data.producer ,
         country: data.country ,
         category: data.category ,
+        imgUrl: data.imgUrl ,
       } ;
     }
 }

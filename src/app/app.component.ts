@@ -39,4 +39,9 @@ export class AppComponent {
   gotoCart() {
     this.router.navigateByUrl('/user/cart/cartdetail');
   }
+  logoutAction(): void {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/');
+    window.location.reload();
+  }
 }

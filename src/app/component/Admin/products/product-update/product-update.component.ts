@@ -84,6 +84,7 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   updateAction() {
+    console.log('kk')
     console.log('updateImageUrl ==>', this.selectedFile)
     
     const formData: FormData = new FormData();

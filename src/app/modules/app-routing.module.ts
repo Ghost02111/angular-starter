@@ -5,6 +5,8 @@ import { RegisterComponent } from '../component/register/register.component';
 import { LandingPageComponent } from '../component/landing-page/landing-page.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { CartDetailComponent } from '../component/user/cart/cart.detail/cart.detail.component';
+import { ProductsComponent } from '../component/products/products.component';
+import { PaymentComponent } from '../component/payment/payment.component';
 
  
 const routes: Routes = [
@@ -16,7 +18,8 @@ const routes: Routes = [
   { path: 'auth/productdetail/:id', component: ProductDetailComponent } ,
   
   { path: 'user/cart/cartdetail' , component: CartDetailComponent } ,
-  
+  { path: 'products', component: ProductsComponent },
+  { path: 'checkout', component: PaymentComponent }
 
 ];
  

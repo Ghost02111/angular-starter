@@ -6,6 +6,7 @@ export class Product {
     country: string ;
     category: string ;
     imgUrl: string;
+    quantity?: number;
      constructor (
          id: number = 0 ,
          name: string = '',
@@ -14,6 +15,7 @@ export class Product {
          country: string = '',
          category: string = '' ,
          imgUrl: string = '' ,
+         quantity: number = 1
     ) {
         this.id = id ;
         this.name = name ;
@@ -22,5 +24,6 @@ export class Product {
         this.country = country ;
         this.category = category ;
         this.imgUrl = imgUrl ;
+        this.quantity = quantity;
     }
 } 

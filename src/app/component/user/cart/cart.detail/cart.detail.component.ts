@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../../../../service/cart-service';
-import { Observable, observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as CartActions from '../../../../store/cart/cart.action' ;
+import * as CartActions from '../../../../store/cart/cart.action';
 import { selectCart, selectCartItems } from '../../../../store/cart/cart.select';
 
 @Component({
@@ -88,4 +88,8 @@ export class CartDetailComponent implements OnInit {
     })
   }
 
+
+  gotoCheckout() {
+    this.router.navigate(['/checkout']) ;
+  }
 }

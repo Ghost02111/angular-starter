@@ -4,8 +4,8 @@ import { Product } from '../Admin/models/product';
 import { Category } from '../Admin/models/category';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { selectProductList } from '../../store/product/product.selector' ;
-import * as ProductAction from '../../../app/store/product/product.action' ;
+import { selectProductList } from '../../store/product/product.selector';
+import * as ProductAction from '../../../app/store/product/product.action';
 import { CategoryService } from '../../service/category-service';
 
 @Component({

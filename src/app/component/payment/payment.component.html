@@ -1,0 +1,165 @@
+<div class="payment-page">
+  <div class="payment-container">
+    <!-- Order Summary Section -->
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-items">
+        <div class="summary-item">
+          <span>Subtotal</span>
+          <span>${{ cartTotal$ }}</span>
+        </div>
+        <div class="summary-item">
+          <span>Shipping</span>
+          <span>$5.00</span>
+        </div>
+        <div class="summary-item">
+          <span>Tax</span>
+          <span>${{ cartTotal$ * 0.1 }}</span>
+        </div>
+        <div class="summary-item total">
+          <span>Total</span>
+          <span>${{ cartTotal$ + 5 + (cartTotal$ * 0.1) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method Section -->
+    <div class="payment-methods">
+      <h3>Payment Method</h3>
+      <div class="method-options">
+        <button class="method-btn active">
+          <i class="fab fa-cc-visa"></i>
+          Credit Card
+        </button>
+        <button class="method-btn">
+          <i class="fab fa-paypal"></i>
+          PayPal
+        </button>
+        <button class="method-btn">
+          <i class="fab fa-apple-pay"></i>
+          Apple Pay
+        </button>
+      </div>
+    </div>
+
+    <!-- Card Details Section -->
+    <div class="card-section">
+      <div class="card-container">
+        <div class="card-preview" [class.flipped]="cvv.length > 0">
+          <div class="card-front">
+            <div class="card-type">
+              <i class="fab fa-cc-visa"></i>
+            </div>
+            <div class="card-number">
+              {{ cardNumber || '**** **** **** ****' }}
+            </div>
+            <div class="card-info">
+              <div class="card-holder">
+                <span>Card Holder</span>
+                <div>FULL NAME</div>
+              </div>
+              <div class="card-expires">
+                <span>Expires</span>
+                <div>{{ expiryDate || 'MM/YY' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-strip"></div>
+            <div class="card-cvv">
+              <span>CVV</span>
+              <div class="cvv-band">{{ cvv || '***' }}</div>
+            </div>
+          </div>
+        </div>
+
+        <form class="payment-form" (ngSubmit)="handlePayment()">
+          <div class="form-group">
+            <label>Cardholder Name</label>
+            <input 
+              type="text" 
+              placeholder="John Doe"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Card Number</label>
+            <div class="card-input-wrapper">
+              <input 
+                type="text" 
+                [value]="cardNumber"
+                (input)="formatCardNumber($event)"
+                placeholder="1234 5678 9012 3456"
+                required
+              >
+              <div class="card-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input 
+                type="text" 
+                [value]="expiryDate"
+                (input)="formatExpiryDate($event)"
+                placeholder="MM/YY"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input 
+                type="text" 
+                [value]="cvv"
+                (input)="formatCVV($event)"
+                placeholder="123"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="save-card">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Save card for future payments
+            </label>
+          </div>
+
+          <button 
+            type="submit" 
+            class="pay-button" 
+            [disabled]="loading"
+          >
+            <span *ngIf="!loading">Pay ${{ cartTotal$ + 5 + (cartTotal$ * 0.1) }}</span>
+            <div class="loader" *ngIf="loading"></div>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Security Info -->
+    <div class="security-info">
+      <div class="security-item">
+        <i class="fas fa-lock"></i>
+        <div>
+          <h4>Secure Payment</h4>
+          <p>Your payment information is encrypted</p>
+        </div>
+      </div>
+      <div class="security-item">
+        <i class="fas fa-shield-alt"></i>
+        <div>
+          <h4>Money Back Guarantee</h4>
+          <p>30-day money-back guarantee</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

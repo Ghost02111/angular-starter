@@ -1,0 +1,53 @@
+<section class="products-page">
+  <!-- Enhanced Header Section -->
+  <div class="products-header">
+    <div class="header-content">
+      <h1>Discover Our Products</h1>
+      <p>Browse through our curated collection of premium products designed to meet your needs</p>
+    </div>
+  </div>
+
+  <!-- Filters and Search -->
+  <div class="filters-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input 
+        type="text" 
+        placeholder="Search products..." 
+        (input)="onSearch($event)"
+        [value]="searchQuery"
+      >
+    </div>
+    
+    <div class="filters">
+      <div class="categories">
+        <button 
+          *ngFor="let category of categories"
+          [class.active]="selectedCategory === category"
+          (click)="onCategoryChange(category)"
+          class="category-btn"
+        >
+          {{category}}
+        </button>
+      </div>
+      
+      <div class="sort-by">
+        <select>
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid">
+		<div  *ngFor="let item of products$ | async">
+			<app-product-card-component
+				[product]="item"
+				(gotoProductDetailEvent)="gotoProductDetail(item)"
+			></app-product-card-component>
+		</div>
+  </div>
+</section> 

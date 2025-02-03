@@ -1,43 +1,42 @@
-<div class="product-card shadow-lg" (click)="gotoProductDetail()">
-    <div style="
-    width: 50%;
-    height: 50%;
-    border-radius: 20px;
-    ">
+<div class="product-card" (click)="gotoProductDetail()">
+  <div class="image-container">
+    <span class="category-badge">{{ product.category }}</span>
+    <button class="wishlist-btn">
+      <i class="bi bi-heart"></i>
+    </button>
     @if (product.imgUrl) {
-      <img class="image"  
-      [src]="'http://localhost:4000/' + product.imgUrl"  alt="kkk"  
-   >
+      <img 
+        class="image" 
+        [src]="'http://localhost:4000/' + product.imgUrl" 
+        [alt]="product.name"
+      >
     } @else {
-      <img class="image"  
-      [src]="'http://localhost:4000/uploads/1735588001278-photo_2024-11-21_19-21-24.jpg'"  alt="kkk"  
-   >
+      <img 
+        class="image" 
+        src="http://localhost:4000/uploads/1735588001278-photo_2024-11-21_19-21-24.jpg" 
+        alt="Default Product Image"
+      >
     }
-        
-    </div>
-    <div class="p-3">
-      <span class="category-badge mb-2 d-inline-block" style="color: blue;">
-        {{ product.category }}
-      </span>
-      <h6 class="product-name">{{ product.name }}</h6>
-  
+  </div>
 
-      <div class="">         <!-- sticky footer class removed -->
-        <div class="rating-stars mb-2" style="padding: 0;">
-          <i class="bi bi-star-fill " style="color: #f3f023;"></i>
-          <i class="bi bi-star-fill" style="color: #f3f023;"></i>
-          <i class="bi bi-star-fill" style="color: #f3f023;"></i>
-          <i class="bi bi-star-fill" style="color: #f3f023;"></i>
-          <i class="bi bi-star-fill" style="color: #f3f023;"></i>
-          <span class="text-muted ms-2">(5)</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <span class="price">price: {{ product.price }}$</span>
-          <button class="btn cart-btn" style="margin-left: 10px;">
-            <i class="bi bi-cart-plus" ></i>
-          </button>
-        </div>
-      </div>
+  <div class="product-content">
+    <h6 class="product-name">{{ product.name }}</h6>
+    
+    <div class="rating-stars">
+      <i class="bi bi-star-fill star"></i>
+      <i class="bi bi-star-fill star"></i>
+      <i class="bi bi-star-fill star"></i>
+      <i class="bi bi-star-fill star"></i>
+      <i class="bi bi-star-fill star"></i>
+      <span class="rating-count">(5)</span>
+    </div>
+
+    <div class="price-container">
+      <span class="price">${{ product.price }}</span>
+      <button class="cart-btn" (click)="$event.stopPropagation()">
+        <i class="bi bi-cart-plus"></i>
+      </button>
     </div>
   </div>
+</div>
   

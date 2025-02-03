@@ -1,85 +1,82 @@
-<div class='card'>
-    <div class='card-header'>
+<div class="product-detail">
+  <div class="product-container">
+    <div class="product-grid">
+      <!-- Image Section -->
+      <div class="image-section">
+        @if (product.imgUrl) {
+					<img class="productImage"  
+					[src]="'http://localhost:4000/' + product.imgUrl"  alt="kkk"  
+			 >
+				} @else {
+					<img class="productImage"  
+					[src]="'http://localhost:4000/uploads/1735588001278-photo_2024-11-21_19-21-24.jpg'"  alt="kkk"  
+			 >
+				}
+      </div>
 
-    </div>
-
-    <div class='card-body'>
-        <div class='row'>
-            <div class='col-md-5' style="display: flex;
-            justify-content: center;">
-                @if (product.imgUrl) {
-                    <img class="productImage"  
-                    [src]="'http://localhost:4000/' + product.imgUrl"  alt="kkk"  
-                 >
-                  } @else {
-                    <img class="productImage"  
-                    [src]="'http://localhost:4000/uploads/1735588001278-photo_2024-11-21_19-21-24.jpg'"  alt="kkk"  
-                 >
-                  }
-            </div>
-            <div class='col-md-7'>
-                <div class='row'>
-                    <div class='col-md-4'>Product Name:</div>
-                    <div class='col-md-8'>{{ product.name }}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-4'>Price:</div>
-                    <div class='col-md-8'>{{ product.price }}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-4'>Producer:</div>
-                    <div class='col-md-8'>{{ product.producer }}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-4'>Country:</div>
-                    <div class='col-md-8'>{{ product.country }}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-4'>Category:</div>
-                    <div class='col-md-8'>{{ product.category }}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-4'>5 Star Rating:</div>
-                    <div class='col-md-8'>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="quantity" class="form-label"> Quantity:</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="quantity"
-                      value="1"
-                      min="1"
-                      max="100"
-                      style="width: 80px"
-                      #quantityInput
-                    />
-                  </div>
-                  <button
-                  class="btn btn-info btn-lg mb-3 me-2"
-                  (click)="addToCart(product.id , +quantityInput.value)"
-                >
-                  <i class="bi bi-cart-plus"></i>
-                  Add 
-                </button>
-            </div>
-
-
+      <!-- Product Info Section -->
+      <div class="product-info">
+        <div class="product-header">
+          <span class="category-badge">{{ product.category }}</span>
+          <h1 class="product-title">{{ product.name }}</h1>
+          <div class="product-price">${{ product.price }}</div>
         </div>
-    </div>
 
-    <div class='card-footer'>
-        <button class='btn btn-outline-secondary' style='width:80px' (click)="goback()">
-            <i class='fa fa-chevron-left'></i> Back
-        </button>
-        <button class='btn btn-outline-secondary' style='width:80px' (click)="gotoCart()">
-            <i class='fa fa-shopping-cart'></i> Cart
-        </button>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Producer:</span>
+            <span class="info-value">{{ product.producer }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Country:</span>
+            <span class="info-value">{{ product.country }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Rating:</span>
+            <div class="rating">
+              <div class="stars">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <span>(5.0)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quantity-section">
+          <label for="quantity" class="quantity-label">Quantity:</label>
+          <input
+            type="number"
+            class="quantity-input"
+            id="quantity"
+            value="1"
+            min="1"
+            max="100"
+            #quantityInput
+          />
+        </div>
+
+        <div class="action-buttons">
+          <button 
+            class="add-to-cart" 
+            (click)="addToCart(product.id, +quantityInput.value)"
+          >
+            <i class="bi bi-cart-plus"></i>
+            Add to Cart
+          </button>
+          <button class="back-btn" (click)="goback()">
+            <i class="bi bi-arrow-left"></i>
+            Back
+          </button>
+          <button class="cart-btn" (click)="gotoCart()">
+            <i class="bi bi-cart"></i>
+            View Cart
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

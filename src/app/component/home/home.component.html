@@ -1,0 +1,165 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your One-Stop Shopping Destination</h1>
+      <p>Discover millions of products with fast delivery and best deals</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary btn-lg" (click)="navigateToShop()">Shop Now</button>
+        <button class="btn btn-outline-light btn-lg" (click)="navigateToNewArrivals()">New Arrivals</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop by Category -->
+  <section class="categories">
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <button class="btn btn-outline-primary" (click)="viewAllCategories()">View All Categories</button>
+    </div>
+    <div class="category-grid">
+      <div class="category-card" *ngFor="let category of categories">
+        <div class="category-image">
+          <img [src]="category.image" [alt]="category.name">
+          <div class="category-overlay">
+            <button class="btn btn-light" (click)="navigateToCategory(category.id)">Explore</button>
+          </div>
+        </div>
+        <div class="category-content">
+          <h3>{{category.name}}</h3>
+          <p>{{category.itemCount}}+ items</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending Products -->
+  <section class="trending">
+    <div class="section-header">
+      <h2>Trending Now</h2>
+      <button class="btn btn-link view-all" (click)="viewAllProducts()">View All</button>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of trendingProducts">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name">
+        </div>
+        <div class="product-content">
+          <h3>{{product.name}}</h3>
+          <div class="price-container">
+            <span class="current-price">${{product.currentPrice}}</span>
+            <span class="original-price" *ngIf="product.originalPrice">${{product.originalPrice}}</span>
+          </div>
+          <div class="rating">
+            <i class="fas fa-star filled" *ngFor="let star of [1,2,3,4,5]"></i>
+            <span class="review-count">({{product.reviews}})</span>
+          </div>
+          <button class="btn btn-primary add-to-cart" (click)="addToCart(product.id)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section / Why Choose Us -->
+  <section class="info-section">
+    <div class="section-header text-center">
+      <div class="heading-wrapper">
+        <span class="section-badge">Why Choose Us</span>
+        <h2 class="main-heading">
+          The Perfect Destination for 
+          <span class="highlight">Online Shopping</span>
+        </h2>
+        <p class="section-subtitle">
+          Experience the difference with our premium service and exclusive benefits
+        </p>
+      </div>
+    </div>
+    <div class="info-container">
+      <div class="info-text">
+        <div class="info-stats">
+          <div class="stat-item">
+            <div class="stat-circle">
+              <span class="stat-number">2M+</span>
+            </div>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-circle">
+              <span class="stat-number">500K+</span>
+            </div>
+            <span class="stat-label">Products Available</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-circle">
+              <span class="stat-number">150+</span>
+            </div>
+            <span class="stat-label">Countries Served</span>
+          </div>
+        </div>
+       
+      </div>
+      <div class="info-image-container">
+        <div class="info-image">
+          <img src="../../../images/hero.jpeg" alt="Shopping Experience">
+          <div class="info-badge">
+            <span>Trusted by</span>
+            <strong>2M+ Customers</strong>
+          </div>
+        </div>
+        <div class="experience-badge">
+          <span class="years">15+</span>
+          <span class="text">Years of Excellence</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="offers">
+    <div class="section-header">
+      <h2>Special Offers</h2>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card" *ngFor="let offer of specialOffers">
+        <div class="offer-content">
+          <h3>{{offer.title}}</h3>
+          <p>{{offer.description}}</p>
+          <p class="offer-code">Use code: {{offer.code}}</p>
+          <button class="btn btn-light">Shop Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-item" *ngFor="let feature of features">
+        <div class="feature-icon-wrapper">
+          <i class="feature-icon" [class]="feature.icon"></i>
+        </div>
+        <h3>{{feature.title}}</h3>
+        <p>{{feature.description}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <h2>Get 10% Off Your First Order</h2>
+      <p>Subscribe to our newsletter for exclusive deals and updates</p>
+      <div class="newsletter-form">
+        <div class="input-group">
+          <input 
+            type="email" 
+            [(ngModel)]="emailSubscription" 
+            placeholder="Enter your email address" 
+            class="form-control"
+          >
+          <button class="btn btn-light" (click)="subscribeNewsletter()">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

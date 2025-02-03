@@ -131,6 +131,10 @@
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.card-preview.flipped {
+  transform: rotateY(180deg);
+}
+
 .card-front, .card-back {
   position: absolute;
   width: 100%;
@@ -143,11 +147,98 @@
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #0061ff, #60efff);
+}
+
+/* Card Preview Styles */
+.card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-type {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+}
+
+.card-type i {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .card-number {
   font-size: 1.75rem;
   letter-spacing: 3px;
-  margin: 2rem 0;
+  text-align: center;
   font-family: 'Courier New', monospace;
+  margin: 1rem 0;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.card-holder, .card-expires {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-holder span, .card-expires span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.card-holder div, .card-expires div {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.card-strip {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 1rem 0;
+}
+
+.card-cvv {
+  background: white;
+  color: #1a202c;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 80px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.card-cvv span {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: #64748b;
+}
+
+.cvv-band {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+/* Form Row Styles */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 /* Form Styles */
@@ -285,6 +376,7 @@ input:focus {
   line-height: 1.5;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
   .payment-container {
     padding: 2rem 1.5rem;
@@ -305,5 +397,23 @@ input:focus {
   
   .card-number {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-preview {
+    height: 200px;
+  }
+
+  .card-number {
+    font-size: 1.4rem;
+  }
+
+  .card-front, .card-back {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
   }
 } 
